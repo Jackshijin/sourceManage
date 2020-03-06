@@ -29,6 +29,7 @@
         </div>
         <el-button
           class="btn-login"
+          @click.prevent = "handleLogin()"
           type="success"
           size="mini">登录</el-button>
       </div>
@@ -47,6 +48,12 @@ export default {
     }
   },
   components: {
+  },
+  methods: {
+    handleLogin () {
+      this.$router.push({name: 'home'})
+      this.$message.success('登录成功')
+    }
   }
 }
 </script>

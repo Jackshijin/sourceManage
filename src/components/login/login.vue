@@ -1,63 +1,120 @@
 <template>
-  <div class="page-login">
-    <div class="login-header">
-    </div>
-    <div class="login-panel">
-      <div class="banner">
-        <img
-          src="../../assets/img/bg.jpg"
-          width="480"
-          height="370"
-          alt="jnu">
-      </div>
-      <div class="form">
-        <h4
-          v-if="error"
-          class="tips"><i/>{{ error }}</h4>
-        <p><span>校园资源管理系统</span></p>
-
-        <el-input
-          v-model="username"
-          placeholder="请输入账号"/>
-        <el-input
-          v-model="password"
-          placeholder="请输入密码"
-          type="password"/>
-        <div class="foot">
-          <router-link to="/register">立即注册</router-link>
-          <b>忘记密码？</b>
-        </div>
-        <el-button
-          class="btn-login"
-          @click.prevent = "handleLogin()"
-          type="success"
-          size="mini">登录</el-button>
-      </div>
-    </div>
+  <div class="login-container">
+    <el-form class="login-main sub-center-center" :model="formData" :rules="formRules" ref="formData" label-position="left" label-width="0px">
+      <h3 class="title">校园资源管理系统登录</h3>
+      <el-form-item prop="name">
+        <el-input type="text" v-model="formData.name" auto-complete="off" placeholder="账号"></el-input>
+      </el-form-item>
+      <el-form-item prop="password">
+        <el-input type="password" v-model="formData.password" auto-complete="off" placeholder="密码"></el-input>
+      </el-form-item>
+      <el-form-item class="btn-box">
+        <el-button type="primary" @click="submitLogin('formData')">登录</el-button>
+        <el-button @click="resetForm('formData')">重置</el-button>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 
 <script>
 export default {
   data () {
+    const validate = (rule, value, cb) => {
+      const reg = /^[0-9a-zA-Z]*$/g
+      if (!value) {
+        cb(new Error('请输入内容'))
+      } else if (!reg.test(value)) {
+        cb(new Error('账号需为字母或数字'))
+      } else {
+        cb()
+      }
+    }
     return {
-      username: '',
-      password: '',
-      checked: '',
-      error: ''
+      formData: {
+        name: null,
+        password: null
+      },
+      formRules: {
+        name: [
+          { validator: validate, trigger: 'blur' }
+        ],
+        password: [
+          { validator: validate, trigger: 'blur' }
+        ]
+      },
+      regFlag: {
+        login: true
+      }
     }
   },
   components: {
   },
   methods: {
-    handleLogin () {
-      this.$router.push({name: 'home'})
-      this.$message.success('登录成功')
+    submitLogin (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          const url = '/user/login'
+          let params = {
+            name: this.formData.name,
+            password: this.formData.password
+          }
+          this.$axios.post(url, params).then(res => {
+            if (res.data.code === 200) {
+              let data = res.data
+              console.log(data)
+              const userData = {
+                userName: data.name,
+                userType: data.type
+              }
+              this.$store.dispatch('saveUserInfo', userData)
+              localStorage.setItem('userInfo', JSON.stringify(userData))
+              this.$router.push({name: 'home'})
+              this.$message.success('登录成功')
+            } else {
+              this.$message.error('账号或密码不正确！')
+            }
+          })
+        } else {
+          this.$message.error('Error Submit!')
+        }
+      })
+      // this.$router.push({name: 'home'})
+      // this.$message.success('登录成功')
+    },
+    resetForm (formName) {
+      this.$refs[formName].resetFields()
     }
   }
 }
 </script>
 
 <style lang="scss">
-@import "../../assets/css/login/index";
+  .login-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-image:url('../../assets/img/login_bg.png');
+    background-size: cover;
+    overflow: hidden;
+    .login-main{
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+      background-clip: padding-box;
+      width: 350px;
+      padding: 35px 35px 15px;
+      background: #fff;
+      border: 1px solid #eaeaea;
+      box-shadow: 0 0 25px #cac6c6;
+      h3{
+        text-align: center;
+      }
+      .btn-box{
+        text-align: center;
+      }
+    }
+  }
 </style>

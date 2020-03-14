@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '../components/login/login'
 import Home from '../components/home/home'
+import Info from '../components/home/selfInfo'
 import Source from '../components/source/sourceList'
 import Apply from '../components/source/sourceApply'
 import Repair from '../components/source/sourceRepair'
@@ -32,18 +33,23 @@ export default new Router({
       children: [
         {
           name: 'source',
-          path: 'source',
+          path: '/source',
           component: Source
         },
         {
           name: 'sourceApply',
-          path: 'sourceApply',
+          path: '/sourceApply',
           component: Apply
         },
         {
           name: 'sourceRepair',
-          path: 'sourceRepair',
+          path: '/sourceRepair',
           component: Repair
+        },
+        {
+          name: 'selfInfo',
+          path: '/info',
+          component: Info
         }
       ]
     }

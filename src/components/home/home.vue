@@ -17,9 +17,9 @@
                   {{ this.curUserName }}<i class="el-icon-arrow-down el-icon--right"></i>
                 </span>
                   <el-dropdown-menu slot="dropdown" >
-                    <el-dropdown-item>首页</el-dropdown-item>
+                    <el-dropdown-item command="toHome">首页</el-dropdown-item>
                     <el-dropdown-item>Github</el-dropdown-item>
-                    <el-dropdown-item>个人中心</el-dropdown-item>
+                    <el-dropdown-item command="selfInfo">个人信息</el-dropdown-item>
                     <el-dropdown-item>消息</el-dropdown-item>
                     <el-dropdown-item command="logOut">退出</el-dropdown-item>
                   </el-dropdown-menu>
@@ -113,6 +113,25 @@ export default {
     handleCommand (command) {
       if (command === 'logOut') {
         this.logOut()
+      }
+      if (command === 'toHome') {
+        this.toHome()
+      }
+      if (command === 'selfInfo') {
+        this.getSelfInfo()
+      }
+    },
+    getSelfInfo () {
+      this.$router.push({name: 'selfInfo'})
+    },
+    toHome () {
+      // 当前页就是首页不跳转，处理报错
+      if (this.$route.name === 'home') {
+        this.$message.warning('当前页面就是首页')
+      } else {
+        this.$router.push({name: 'home'})
+        console.log('去首页')
+        // console.log(this.$route.name)
       }
     },
     logOut () {

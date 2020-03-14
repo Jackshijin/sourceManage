@@ -64,7 +64,8 @@ export default {
               console.log(data)
               const userData = {
                 userName: data.name,
-                userType: data.type
+                userType: data.type,
+                userEmail: data.email
               }
               this.$store.dispatch('saveUserInfo', userData)
               localStorage.setItem('userInfo', JSON.stringify(userData))

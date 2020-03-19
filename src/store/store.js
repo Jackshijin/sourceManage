@@ -8,7 +8,8 @@ const store = new Vuex.Store({
   state: {
     curSourceName: '',
     curSourceType: '',
-    userInfo: !localStorage.getItem('userInfo') ? {} : JSON.parse(localStorage.getItem('userInfo'))
+    userInfo: !localStorage.getItem('userInfo') ? {} : JSON.parse(localStorage.getItem('userInfo')),
+    pageSize: 10 // 每页请求多少条数据
   },
   mutations: {
     getSourceName (state, name) {

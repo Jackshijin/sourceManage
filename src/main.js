@@ -16,6 +16,7 @@ Vue.use(ElementUI)
 Vue.use(Vuex)
 Vue.config.productionTip = false
 axios.defaults.baseURL = 'http://127.0.0.1:5050'
+axios.defaults.withCredentials = true // 每次请求,无论是否跨域,都带上cookie信息
 Vue.prototype.$axios = axios
 // Vue.prototype.$baseURL = baseURL
 Vue.prototype.$md5 = md5

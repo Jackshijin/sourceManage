@@ -135,10 +135,17 @@ export default {
       }
     },
     logOut () {
-      localStorage.clear()
-      this.$store.dispatch('saveUserInfo', {})
-      this.$router.replace('/')
-      this.$message.success('退出成功')
+      this.$axios.get('/user/logout', {}).then(res => {
+        const data = res.data
+        if (data.code === 200) {
+          localStorage.clear()
+          this.$store.dispatch('saveUserInfo', {})
+          this.$router.replace('/')
+          this.$message.success('退出成功')
+        } else {
+          this.$message.error('发生未知错误，请重试')
+        }
+      })
     }
   },
   created () {

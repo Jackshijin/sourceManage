@@ -6,7 +6,7 @@
         <span>筛选搜索</span>
         <el-button
           style="float: right"
-          @click="handleSearchList()"
+          @click="handleSourceSearch()"
           type="primary"
           size="small">
           查询结果
@@ -20,11 +20,11 @@
       </div>
       <div style="margin-top: 15px">
         <el-form :inline="true" :model="listQuery" size="small" label-width="140px">
-          <el-form-item label="输入搜索：">
-            <el-input style="width: 203px" v-model="listQuery.keyword" placeholder="资源名称"></el-input>
+          <el-form-item label="资源编号：">
+            <el-input style="width: 203px" v-model="listQuery.sourceNumber" placeholder="资源ID"></el-input>
           </el-form-item>
-          <el-form-item label="分类编号：">
-            <el-input style="width: 203px" v-model="listQuery.typeNumber" placeholder="分类编号"></el-input>
+          <el-form-item label="资源名称：">
+            <el-input style="width: 203px" v-model="listQuery.sourceName" placeholder="资源名称"></el-input>
           </el-form-item>
           <el-form-item label="资源分类：">
             <el-cascader
@@ -37,111 +37,109 @@
           </el-form-item>
         </el-form>
       </div>
+      <div class="operate-container">
+        <i class="el-icon-tickets"></i>
+        <span>数据列表</span>
+        <el-button
+          class="btn-add"
+          @click="handleAddSource()"
+          size="mini">
+          添加
+        </el-button>
+      </div>
+      <!--数据表格-->
+      <div class="table-container">
+        <el-table
+          v-loading="!this.regFlag.search"
+          :data="tableData"
+          height="250"
+          border
+          style="width: 100%">
+          <el-table-column
+            label="编号"
+            width="120"
+            align="center"
+            prop="id">
+          </el-table-column>
+
+          <el-table-column
+            prop="source_type"
+            align="center"
+            label="资源分类"
+            width="180">
+          </el-table-column>
+          <el-table-column
+            prop="source_name"
+            align="center"
+            label="资源名称"
+            width="180">
+          </el-table-column>
+          <el-table-column
+            prop="source_capacity"
+            align="center"
+            label="容量"
+            width="180">
+          </el-table-column>
+          <el-table-column
+            align="center"
+            prop="description"
+            label="描述">
+          </el-table-column>
+
+          <el-table-column
+            width="200"
+            align="center"
+            prop="operation"
+            label="操作">
+            <template slot-scope="scope">
+              <el-button-group v-show="judgeAdmin()">
+                <el-button
+                  plain
+                  type="primary"
+                  icon="el-icon-edit"
+                  @click="handleEdit(scope.row)"></el-button>
+                <el-button
+                  plain
+                  type="danger"
+                  icon="el-icon-delete"
+                  @click="handleDelete()"></el-button>
+              </el-button-group>
+
+              <el-button-group v-show="!judgeAdmin()">
+                <el-button
+                  size="small"
+                  type="primary"
+                  @click="handleApply(scope.$index, scope.row)">申请</el-button>
+                <el-button
+                  size="small"
+                  type="primary"
+                  @click="handleDebug(scope.$index, scope.row)">报修</el-button>
+              </el-button-group>
+            </template>
+          </el-table-column>
+        </el-table>
+        <!--分页-->
+        <el-pagination
+          @current-change="handleCurrentChange"
+          :current-page="currentPage"
+          :page-size="pageSize"
+          layout="total, prev, pager, next, jumper"
+          :total="totalCount">
+        </el-pagination>
+      </div>
     </el-card>
-    <el-card class="operate-container" shadow="never">
-      <i class="el-icon-tickets"></i>
-      <span>数据列表</span>
-      <el-button
-        class="btn-add"
-        @click="handleAddSource()"
-        size="mini">
-        添加
-      </el-button>
-    </el-card>
-
-    <!--数据表格-->
-    <div class="table-container">
-      <el-table
-        :data="tableData"
-        height="250"
-        border
-        style="width: 100%">
-        <el-table-column
-          label="#"
-          width="120"
-          align="center"
-          type="index">
-        </el-table-column>
-
-        <el-table-column
-          prop="type"
-          align="center"
-          label="资源分类"
-          width="180">
-        </el-table-column>
-        <el-table-column
-          prop="name"
-          align="center"
-          label="资源名称"
-          width="180">
-        </el-table-column>
-        <el-table-column
-          prop="capacity"
-          align="center"
-          label="容量"
-          width="180">
-        </el-table-column>
-        <el-table-column
-          align="center"
-          prop="description"
-          label="描述">
-        </el-table-column>
-
-        <el-table-column
-          width="200"
-          align="center"
-          prop="operation"
-          label="操作">
-          <template slot-scope="scope">
-            <el-button-group v-show="judgeAdmin()">
-              <el-button
-                plain
-                type="primary"
-                icon="el-icon-edit"
-                @click="handleEdit(scope.row)"></el-button>
-              <el-button
-                plain
-                type="danger"
-                icon="el-icon-delete"
-                @click="handleDelete()"></el-button>
-            </el-button-group>
-
-            <el-button-group v-show="!judgeAdmin()">
-              <el-button
-                size="small"
-                type="primary"
-                @click="handleApply(scope.$index, scope.row)">申请</el-button>
-              <el-button
-                size="small"
-                type="primary"
-                @click="handleDebug(scope.$index, scope.row)">报修</el-button>
-            </el-button-group>
-          </template>
-        </el-table-column>
-      </el-table>
-    </div>
-
-    <!--分页-->
-    <div class="page-container">
-      <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="pageNum"
-        :page-sizes="[5, 10, 20, 40]"
-        :page-size="5"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="total">
-      </el-pagination>
-    </div>
+    <!--<div class="page-container">-->
+      <!---->
+    <!--</div>-->
 
     <!-- 对话框-->
     <!--1、管理员点击添加按钮弹出对话框-->
     <el-dialog title="添加资源" :visible.sync="addDialogFormVisible">
-      <el-form :model="addForm">
-        <el-form-item label="资源名称" :label-width="formLabelWidth">
-          <el-input v-model="addForm.name" autocomplete="off"></el-input>
+      <el-form :model="addForm" ref="addForm">
+        <el-form-item label="资源名称" prop="name" :label-width="formLabelWidth">
+          <el-input v-model="addForm.name" autocomplete="off" placeholder="请输入资源名称"></el-input>
         </el-form-item>
-        <el-form-item label="资源分类" :label-width="formLabelWidth">
+        <el-form-item label="资源分类" :label-width="formLabelWidth" prop="type">
           <el-select v-model="addForm.type" placeholder="请选择资源所属分类">
             <el-option label="普通教室" value="common"></el-option>
             <el-option label="多媒体室" value="media"></el-option>
@@ -154,21 +152,22 @@
             <el-option label="研讨室" value="study-room"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="容量" :label-width="formLabelWidth">
+        <el-form-item label="容量" :label-width="formLabelWidth" prop="capacity">
           <el-input v-model="addForm.capacity" autocomplete="off" placeholder="请输入容量：0或具体数值或不限"></el-input>
         </el-form-item>
-        <el-form-item label="描述" :label-width="formLabelWidth">
+        <el-form-item label="描述" :label-width="formLabelWidth" prop="description">
           <el-input v-model="addForm.description" autocomplete="off" placeholder="请输入相关的描述"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="cancelAddDialogForm()">取 消</el-button>
-        <el-button type="primary" @click="confirmAddDialogForm()">确 定</el-button>
+        <el-button @click="cancelAddDialogForm('addForm')">取 消</el-button>
+        <el-button type="primary" @click="confirmAddDialogForm('addForm')">确 定</el-button>
+        <el-button  @click="resetForm('addForm')">重置</el-button>
       </div>
     </el-dialog>
 
     <!--管理员点击编辑按钮弹出对话框-->
-    <el-dialog title="添加资源" :visible.sync="editDialogFormVisible">
+    <el-dialog title="编辑资源" :visible.sync="editDialogFormVisible">
       <el-form :model="addForm">
         <el-form-item label="资源名称" :label-width="formLabelWidth">
           <el-input v-model="addForm.name" autocomplete="off"></el-input>
@@ -207,6 +206,11 @@
 export default {
   data () {
     return {
+      regFlag: { // 防止频繁点击，造成连续多次发请求
+        search: true,
+        delete: true,
+        edit: true
+      },
       selectedOptions: [],
       // 编辑资源
       editDialogFormVisible: false,
@@ -220,35 +224,16 @@ export default {
       },
       formLabelWidth: '120px',
       // 分页相关数据
-      total: 100,
-      pageNum: 1,
-      pageSize: 2,
+      pageNum: 1, // 请求第几页
+      totalCount: 0, // 总共多少条
+      currentPage: 1, // 初始时在第几页
+      pageSize: this.$store.state.pageSize, // 每页请求多少条
       curUserRole: 'admin1',
       listQuery: {
-        keyword: '',
-        typeNumber: ''
+        sourceName: null,
+        sourceNumber: null
       },
-      tableData: [{
-        type: '课室',
-        name: 'N201',
-        capacity: '50',
-        description: '这是一个小型教室，配有基本的上课用具'
-      }, {
-        type: '场地',
-        name: 'T11前面空地',
-        capacity: '不限',
-        description: '场地较大，适合举办大型活动'
-      }, {
-        type: '图书馆',
-        name: '休息室101',
-        capacity: '1',
-        description: '教师和个人均可申请的休息室'
-      }, {
-        type: '课室',
-        name: 'N503',
-        capacity: '60',
-        description: '这是一个多媒体电脑语音室'
-      }],
+      tableData: [],
       defaultQuery: {
         keyword: '',
         typeNumber: ''
@@ -295,7 +280,68 @@ export default {
       }]
     }
   },
+  created () {
+    this.init()
+    // console.log(this.listQuery.sourceNumber)
+  },
   methods: {
+    // 初始化
+    init () {
+      this.onSearch()
+    },
+    handleSourceSearch () {
+      // 按条件搜索资源
+      let url = '/source/search'
+      if (this.regFlag.search) {
+        this.regFlag.search = false
+        let params = {
+          searchId: this.listQuery.sourceNumber,
+          searchName: this.listQuery.sourceName,
+          searchType: (this.selectedOptions.length === 0) ? null : this.selectedOptions[1],
+          pageNum: this.pageNum,
+          pageSize: this.pageSize
+        }
+        this.$axios.post(url, params).then(res => {
+          let resData = res.data
+          if (resData.code === 200) {
+            this.totalCount = resData.data.totalCount
+            this.tableData = resData.data.list
+            this.currentPage = this.pageNum
+            this.$message.success(resData.message)
+          } else {
+            this.$message.error(resData.message)
+            console.log('error')
+          }
+          this.regFlag.search = true
+        })
+      }
+    },
+
+    onSearch () {
+      let url = '/source/list'
+      if (this.regFlag.search) {
+        this.regFlag.search = false
+        let params = {
+          pageNum: this.pageNum,
+          pageSize: this.pageSize
+        }
+        // console.log(params)
+        this.$axios.post(url, params).then(res => {
+          let resData = res.data
+          if (resData.code === 200) {
+            this.totalCount = resData.data.totalCount
+            this.tableData = resData.data.list
+            // console.log(console.log(resData.data.list))
+            this.currentPage = this.pageNum
+            this.$message.success(resData.message)
+          } else {
+            this.$message.error(resData.message)
+            console.log('error')
+          }
+          this.regFlag.search = true
+        })
+      }
+    },
     // 普通用户点击按钮方法
     handleApply (index, value) {
       this.$router.push({
@@ -304,9 +350,10 @@ export default {
           id: index + 1
         }
       })
-      this.$store.commit('getSourceName', value.name)
-      this.$store.commit('getSourceType', value.type)
-      console.log(value)
+      this.$store.commit('getSourceName', value.source_name)
+      this.$store.commit('getSourceType', value.source_type)
+      // console.log(index)
+      // console.log(value.source_name)
     },
     handleDebug (index, val) {
       this.$router.push({
@@ -315,32 +362,55 @@ export default {
           id: index + 1
         }
       })
-      this.$store.commit('getSourceName', val.name)
-      this.$store.commit('getSourceType', val.type)
+      this.$store.commit('getSourceName', val.source_name)
+      this.$store.commit('getSourceType', val.source_type)
     },
     // 添加数据的相关方法
-    cancelAddDialogForm () {
-      this.addDialogFormVisible = false
+    resetForm (formName) {
+      this.$refs[formName].resetFields()
     },
-    confirmAddDialogForm () {
-      // 发送请求，处理数据
+    cancelAddDialogForm (formName) {
       this.addDialogFormVisible = false
-      // 提示成功
+      this.$refs[formName].resetFields()
+    },
+    confirmAddDialogForm (formName) {
+      // 发送请求，处理数据
+      let params = {
+        sourceName: this.addForm.name,
+        sourceType: this.addForm.type,
+        capacity: this.addForm.capacity,
+        description: this.addForm.description
+      }
+      let url = '/source/add'
+      this.$axios.post(url, params).then(res => {
+        if (res.code === 200) {
+          this.$message.success(res.data.msg)
+        }
+      })
+      // 关闭弹窗
+      this.addDialogFormVisible = false
+      // 清空输入框
+      this.$refs[formName].resetFields()
+      // 重新获取数据
+      this.onSearch()
     },
     // 分页方法：
-    handleSizeChange (val) {
-      console.log(`每页 ${val} 条`)
-    },
+
     handleCurrentChange (val) {
-      console.log(`当前页: ${val}`)
+      this.pageNum = val
+      console.log(val)
+      console.log(this.tableData)
+      this.onSearch()
     },
     judgeAdmin () {
       return this.curUserRole === 'admin'
     },
-    handleSearchList () {},
     handleResetSearch () {
       this.selectedOptions = []
-      this.listQuery = this.defaultQuery
+      this.listQuery.sourceName = null
+      this.listQuery.sourceNumber = null
+      this.pageNum = 1
+      this.onSearch()
     },
     handleAddSource () {
       this.addDialogFormVisible = true

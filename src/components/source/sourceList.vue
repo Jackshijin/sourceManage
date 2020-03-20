@@ -41,6 +41,7 @@
         <i class="el-icon-tickets"></i>
         <span>数据列表</span>
         <el-button
+          v-show="judgeAdmin()"
           class="btn-add"
           @click="handleAddSource()"
           size="mini">
@@ -102,7 +103,7 @@
                   plain
                   type="danger"
                   icon="el-icon-delete"
-                  @click="handleDelete()"></el-button>
+                  @click="handleDelete(scope.row)"></el-button>
               </el-button-group>
 
               <el-button-group v-show="!judgeAdmin()">
@@ -168,12 +169,12 @@
 
     <!--管理员点击编辑按钮弹出对话框-->
     <el-dialog title="编辑资源" :visible.sync="editDialogFormVisible">
-      <el-form :model="addForm">
+      <el-form :model="editForm">
         <el-form-item label="资源名称" :label-width="formLabelWidth">
-          <el-input v-model="addForm.name" autocomplete="off"></el-input>
+          <el-input v-model="editForm.source_name" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="资源分类" :label-width="formLabelWidth">
-          <el-select v-model="addForm.type" placeholder="请选择资源所属分类">
+          <el-select v-model="editForm.source_type" placeholder="请选择资源所属分类">
             <el-option label="普通教室" value="common"></el-option>
             <el-option label="多媒体室" value="media"></el-option>
             <el-option label="会议室" value="meeting"></el-option>
@@ -186,10 +187,10 @@
           </el-select>
         </el-form-item>
         <el-form-item label="容量" :label-width="formLabelWidth">
-          <el-input v-model="addForm.capacity" autocomplete="off" placeholder="请输入容量：0或具体数值或不限"></el-input>
+          <el-input v-model="editForm.source_capacity" autocomplete="off" placeholder="请输入容量：0或具体数值或不限"></el-input>
         </el-form-item>
         <el-form-item label="描述" :label-width="formLabelWidth">
-          <el-input v-model="addForm.description" autocomplete="off" placeholder="请输入相关的描述"></el-input>
+          <el-input v-model="editForm.description" autocomplete="off" placeholder="请输入相关的描述"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -220,6 +221,13 @@ export default {
         name: '',
         type: '',
         capacity: '',
+        description: ''
+      },
+      // 编辑资源相关数据
+      editForm: {
+        source_name: '',
+        source_type: '',
+        source_capacity: '',
         description: ''
       },
       formLabelWidth: '120px',
@@ -284,7 +292,18 @@ export default {
     this.init()
     // console.log(this.listQuery.sourceNumber)
   },
+  computed: {
+
+  },
   methods: {
+    // 判断角色
+    judgeAdmin () {
+      if (this.$store.state.userInfo['userType'] === 1) {
+        this.curUserRole = '管理员'
+        return true
+      }
+      // return this.curUserRole === 'admin'
+    },
     // 初始化
     init () {
       this.onSearch()
@@ -333,7 +352,7 @@ export default {
             this.tableData = resData.data.list
             // console.log(console.log(resData.data.list))
             this.currentPage = this.pageNum
-            this.$message.success(resData.message)
+            // this.$message.success(resData.message)
           } else {
             this.$message.error(resData.message)
             console.log('error')
@@ -383,7 +402,7 @@ export default {
       }
       let url = '/source/add'
       this.$axios.post(url, params).then(res => {
-        if (res.code === 200) {
+        if (res.status === 200) {
           this.$message.success(res.data.msg)
         }
       })
@@ -402,9 +421,6 @@ export default {
       console.log(this.tableData)
       this.onSearch()
     },
-    judgeAdmin () {
-      return this.curUserRole === 'admin'
-    },
     handleResetSearch () {
       this.selectedOptions = []
       this.listQuery.sourceName = null
@@ -417,28 +433,70 @@ export default {
     },
     // 管理员点击删除或编辑按钮触发方法
     handleEdit (source) {
+      console.log(source)
+      this.$store.commit('getSourceId', source.id)
       this.editDialogFormVisible = true
-      this.addForm = source
+      this.editForm = source
+      // console.log(this.$store.state.curSourceId)
       // console.log(index, row)
     },
     // 编辑确定/取消方法
     cancelEditDialogForm () {
       this.editDialogFormVisible = false
+      this.onSearch()
     },
     confirmEditDialogForm () {
+      console.log(this.editForm)
+      // 更新数据，发送请求
+      if (this.regFlag.edit) {
+        this.regFlag.edit = false
+        let params = {
+          editId: this.$store.state.curSourceId,
+          sourceName: this.editForm.source_name,
+          sourceType: this.editForm.source_type,
+          capacity: this.editForm.source_capacity,
+          description: this.editForm.description
+        }
+        let url = '/source/update'
+        this.$axios.post(url, params).then(res => {
+          if (res.status === 200) {
+            console.log(res)
+            this.$message.success(res.data.msg)
+            this.onSearch()
+          } else {
+            this.$message.error(res.statusText)
+          }
+          this.regFlag.edit = true
+        })
+      }
       this.editDialogFormVisible = false
     },
-    handleDelete () {
+    handleDelete (source) {
+      console.log(source)
       this.$confirm('此操作将永久删除该资源, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
         // 点击确认后处理方法
-        this.$message({
-          type: 'success',
-          message: '删除成功!'
-        })
+        if (this.regFlag.delete) {
+          this.regFlag.delete = false
+          let userType = this.$store.state.userInfo['userType']
+          let params = {
+            userType: userType,
+            sourceId: source.id
+          }
+          let url = '/source/delete'
+          this.$axios.post(url, params).then(res => {
+            if (res.status === 200) {
+              this.$message.success(res.data.msg)
+            } else {
+              this.$message.error(res.data.msg)
+            }
+            this.onSearch()
+          })
+        }
+        this.regFlag.delete = true
       }).catch(() => {
         // 点击取消后处理方法
         this.$message({

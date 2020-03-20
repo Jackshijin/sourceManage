@@ -43,7 +43,7 @@ export default {
         ]
       },
       regFlag: {
-        login: true
+        login: true // 防止连续点击造成多次访问接口
       }
     }
   },
@@ -54,27 +54,31 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           const url = '/user/login'
-          let params = {
-            name: this.formData.name,
-            password: this.formData.password
-          }
-          this.$axios.post(url, params).then(res => {
-            if (res.data.code === 200) {
-              let data = res.data
-              console.log(data)
-              const userData = {
-                userName: data.name,
-                userType: data.type,
-                userEmail: data.email
-              }
-              this.$store.dispatch('saveUserInfo', userData)
-              localStorage.setItem('userInfo', JSON.stringify(userData))
-              this.$router.push({name: 'home'})
-              this.$message.success('登录成功')
-            } else {
-              this.$message.error('账号或密码不正确！')
+          if (this.regFlag.login) {
+            this.regFlag.login = false
+            let params = {
+              name: this.formData.name,
+              password: this.formData.password
             }
-          })
+            this.$axios.post(url, params).then(res => {
+              if (res.data.code === 200) {
+                let data = res.data
+                console.log(data)
+                const userData = {
+                  userName: data.name,
+                  userType: data.type,
+                  userEmail: data.email
+                }
+                this.$store.dispatch('saveUserInfo', userData)
+                localStorage.setItem('userInfo', JSON.stringify(userData))
+                this.$router.push({name: 'home'})
+                this.$message.success('登录成功')
+              } else {
+                this.$message.error('账号或密码不正确！')
+              }
+            })
+          }
+          this.regFlag.login = true
         } else {
           this.$message.error('Error Submit!')
         }

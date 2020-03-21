@@ -51,11 +51,12 @@
 export default {
   data () {
     return {
+      regFlag: true,
       timeValue: '',
       dateValue: '',
       pickerOptions: {
         disabledDate (time) {
-          return time.getTime() > Date.now()
+          return time.getTime() < Date.now()
         },
         shortcuts: [{
           text: '今天',
@@ -112,17 +113,41 @@ export default {
   created () {
     this.applyForm.name = this.$store.state.curSourceName
     this.applyForm.kind = this.$store.state.curSourceType
+    this.applyForm.applier = this.$store.state.userInfo['userName']
   },
   methods: {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert('submit!')
+          if (this.regFlag) {
+            this.regFlag = false
+            let url = '/apply/create'
+            let params = {
+              sourceName: this.applyForm.name,
+              sourceType: this.applyForm.kind,
+              applyDate: this.applyForm.date,
+              applyTime: this.applyForm.time,
+              cause: this.applyForm.cause,
+              applyComment: this.applyForm.desc
+            }
+            this.$axios.post(url, params).then(res => {
+              if (res.status === 200) {
+                this.$message.success(res.data.msg)
+                this.$router.go(-1)
+              } else {
+                this.$message.error(res.statusText)
+              }
+              console.log(res.status)
+              console.log(res.data)
+            })
+          }
         } else {
           console.log('error submit!!')
           return false
         }
+        this.regFlag = true
       })
+      this.$refs[formName].resetFields()
     },
     handleCancelForm (formName) {
       this.$router.push({ path: '/source' })

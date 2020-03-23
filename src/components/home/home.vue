@@ -35,7 +35,7 @@
             <el-submenu index="1">
               <template slot="title">
                 <i class="el-icon-location"></i>
-                <span>资源列表</span>
+                <span>资源管理</span>
               </template>
               <el-menu-item index="source">
                 <i class="el-icon-location"></i>
@@ -43,7 +43,7 @@
               </el-menu-item>
               <el-menu-item index="1-2">
                 <i class="el-icon-location"></i>
-                <span>资源管理</span>
+                <span>资源相关</span>
               </el-menu-item>
             </el-submenu>
 
@@ -67,11 +67,11 @@
                 <i class="el-icon-location"></i>
                 <span>报表管理</span>
               </template>
-              <el-menu-item index="3-1">
+              <el-menu-item index="applyList">
                 <i class="el-icon-location"></i>
-                <span>申请表</span>
+                <span>待处理申请表</span>
               </el-menu-item>
-              <el-menu-item index="3-2">
+              <el-menu-item index="repairList">
                 <i class="el-icon-location"></i>
                 <span>报修表</span>
               </el-menu-item>

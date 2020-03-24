@@ -49,7 +49,7 @@
         width="200"
         label="操作">
         <template slot-scope="scope">
-          <el-button type="text" @click="handleUpdate(scope.row)">修改</el-button>
+          <el-button type="text" @click="handleUpdate(scope.$index,scope.row)">修改</el-button>
           <el-button type="text" @click="handleSubmit(scope.row)">提交</el-button>
           <el-button type="text" @click="getDetail(scope.row)">详细信息</el-button>
         </template>
@@ -100,8 +100,10 @@
 <script>
 
 export default {
+  inject: ['reload'],
   data () {
     return {
+      updateIndex: null,
       tableData: [],
       sourceId: null,
       dialogFormVisible: false,
@@ -141,10 +143,18 @@ export default {
       }
     }
   },
+  // activated () {
+  //   this.getApplyList()
+  // },
   created () {
     this.init()
+    // console.log(this.$route.name)
   },
   methods: {
+    // 解决页面刷新问题
+    // pageRefresh (name) {
+    //   this.$router.replace({path: '/refresh', query: { name: name }})
+    // },
     // 初始化
     init () {
       this.getApplyList()
@@ -165,29 +175,38 @@ export default {
       this.$axios.post(url, params).then(res => {
         // console.log(res)
         // console.log(res.data)
+        // console.log(this.tableData)
         if (res.status === 200) {
           this.$message.success(res.data.msg)
+          this.dialogFormVisible = false
+          this.reload()
         }
       })
-      this.getApplyList()
-      this.dialogFormVisible = false
+      // this.pageRefresh(this.$route.name)
+      // this.getApplyList()
+      // this.$router.go(0) 页面会出现白屏，明显的停顿
     },
     getApplyList () {
       this.$axios.get('/apply/todo', {}).then(res => {
         if (res.status === 200) {
-          let resData = res.data.data.arr
+          let resData = JSON.parse(JSON.stringify(res.data.data.arr))
           resData.map(row => {
             if (row.create_time) {
               row.create_time = this.$moment(row.create_time).format('YYYY-MM-DD HH:mm:ss')
             }
           })
           // console.log(resData)
-          //   this.$set(this.tableData,)
-          this.tableData = resData
+          // slice不会刷新数据
+          // this.tableData = resData.slice(0)
+          this.tableData = JSON.parse(JSON.stringify(resData))
+          // this.tableData = resData
         }
       })
     },
-    handleUpdate (list) {
+    handleUpdate (index, list) {
+      this.updateIndex = index
+      // console.log(index)
+      // console.log(list)
       this.dialogFormVisible = true
       this.sourceId = list.id
       this.updateForm.name = list.source_name

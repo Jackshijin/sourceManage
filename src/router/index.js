@@ -7,6 +7,7 @@ import Source from '../components/source/sourceList'
 import ApplyList from '../components/list/applyList'
 import RepairList from '../components/list/repairList'
 import Apply from '../components/source/sourceApply'
+import Refresh from '../components/source/refresh'
 import Repair from '../components/source/sourceRepair'
 import Register from '../components/login/register'
 
@@ -62,6 +63,11 @@ export default new Router({
           name: 'repairList',
           path: '/repairList',
           component: RepairList
+        },
+        {
+          name: 'refresh',
+          path: '/refresh',
+          component: Refresh
         }
       ]
     }

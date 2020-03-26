@@ -6,6 +6,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
+    sourceApplyId: -1, // source_apply_id
     curSourceId: '', // 保存资源id值
     curSourceName: '',
     curSourceType: '',
@@ -13,6 +14,9 @@ const store = new Vuex.Store({
     pageSize: 10 // 每页请求多少条数据
   },
   mutations: {
+    getSourceApplyId (state, id) {
+      state.sourceApplyId = id
+    },
     getSourceId (state, id) {
       state.curSourceId = id
     },

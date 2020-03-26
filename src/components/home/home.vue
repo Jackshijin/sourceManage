@@ -71,6 +71,10 @@
                 <i class="el-icon-location"></i>
                 <span>待处理申请表</span>
               </el-menu-item>
+              <el-menu-item index="myApply">
+                <i class="el-icon-location"></i>
+                <span>个人申请表</span>
+              </el-menu-item>
               <el-menu-item index="repairList">
                 <i class="el-icon-location"></i>
                 <span>报修表</span>
@@ -155,13 +159,13 @@ export default {
   created () {
     this.curUserName = this.$store.state.userInfo['userName']
     let curUserType = localStorage.getItem('userInfo').userType
-    if (curUserType > 1) {
+    if (curUserType !== 1) {
       this.curUserRole = '普通用户'
     } else {
       this.curUserRole = '管理员'
     }
-    console.log(this.curUserRole)
-    console.log(this.curUserName)
+    // console.log(this.curUserRole)
+    // console.log(this.curUserName)
   }
 }
 </script>

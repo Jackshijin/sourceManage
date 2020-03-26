@@ -6,6 +6,8 @@ import Info from '../components/home/selfInfo'
 import Source from '../components/source/sourceList'
 import ApplyList from '../components/list/applyList'
 import RepairList from '../components/list/repairList'
+import MyApply from '../components/list/myApply'
+import ApplyDetail from '../components/list/applyDetail'
 import Apply from '../components/source/sourceApply'
 import Refresh from '../components/source/refresh'
 import Repair from '../components/source/sourceRepair'
@@ -68,6 +70,16 @@ export default new Router({
           name: 'refresh',
           path: '/refresh',
           component: Refresh
+        },
+        {
+          name: 'myApply',
+          path: '/myApply',
+          component: MyApply
+        },
+        {
+          name: 'applyDetail',
+          path: '/applyDetail',
+          component: ApplyDetail
         }
       ]
     }

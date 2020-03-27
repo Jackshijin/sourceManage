@@ -65,8 +65,9 @@ export default {
   },
   methods: {
     // 详细信息
-    getMyDetail () {
-
+    getMyDetail (list) {
+      this.$store.commit('getSourceApplyId', list.id)
+      this.$router.push({ name: 'applyDetail' })
     },
     // 获取个人申请表
     getMyApply () {

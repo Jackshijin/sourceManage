@@ -180,7 +180,8 @@ export default {
     },
     // 审核相关方法
     handleCheck (list) {
-
+      this.$store.commit('getSourceApplyId', list.id)
+      this.$router.push({ name: 'applyDetail' })
     },
     // 提交提示框确定和取消方法
     handleCancelSubmit () {
@@ -195,6 +196,7 @@ export default {
         console.log(res)
         if (res.status === 200) {
           this.$message.success(res.data.msg)
+          this.reload()
           console.log(res.data.msg)
         }
       })

@@ -12,32 +12,36 @@
             prop="source_name"
             align="center"
             label="资源名称"
-            width="180">
+            width="150">
           </el-table-column>
           <el-table-column
             prop="cause"
             align="center"
             label="用途"
-            width="180">
+            width="250">
           </el-table-column>
           <el-table-column
             prop="applier"
             align="center"
+            width="150"
             label="创建人">
           </el-table-column>
           <el-table-column
             prop="create_time"
             align="center"
+            width="180"
             label="创建时间">
           </el-table-column>
           <el-table-column
             prop="next_deal_role"
             align="center"
+            width="150"
             label="待处理人">
           </el-table-column>
           <el-table-column
             prop="status"
             align="center"
+            width="150"
             label="状态">
           </el-table-column>
         </el-table>
@@ -50,18 +54,17 @@
             <el-table-column
               prop="source_type"
               align="center"
-              label="资源分类"
-              width="180">
+              label="资源分类">
             </el-table-column>
             <el-table-column
               prop="apply_date"
               align="center"
-              label="使用日期"
-              width="180">
+              label="使用日期">
             </el-table-column>
             <el-table-column
               prop="apply_time"
               align="center"
+              width="150"
               label="开始时间">
             </el-table-column>
             <el-table-column
@@ -76,7 +79,7 @@
         <div class="table-record">
           <el-table
             :data="tableRecord"
-            height="250"
+            max-height="250"
             style="width: 100%">
             <el-table-column
               prop="deal_user"
@@ -108,6 +111,16 @@
           </el-table>
         </div>
       </div>
+      <el-input
+        v-model="inputComment"
+        class="input-comment"
+        placeholder="审核理由..."
+        v-show="isShow">
+        <i class="el-icon-edit-outline"/>
+      </el-input>
+      <el-button type="primary" class="btn-pass" @click="handlePass()" v-show="isShow">通过</el-button>
+      <el-button type="primary" class="btn-reject" @click="handleReject()" v-show="isShow">拒绝</el-button>
+      <el-button type="primary" class="btn-back" @click="handleBack()">返回</el-button>
     </div>
   </div>
 </template>
@@ -115,17 +128,55 @@
 <script>
 
 export default {
+  inject: ['reload'],
   data () {
     return {
       tableInfo: [],
       tableDetail: [],
-      tableRecord: []
+      tableRecord: [],
+      inputComment: ''
+    }
+  },
+  computed: {
+    isShow () {
+      return this.$store.state.userInfo['userType'] === 1
     }
   },
   created () {
     this.getTableData()
   },
   methods: {
+    handlePass () {
+      let url = '/apply/agree'
+      let params = {
+        id: this.$store.state.sourceApplyId,
+        comment: this.inputComment
+      }
+      this.$axios.post(url, params).then(res => {
+        if (res.status === 200) {
+          this.$message.success(res.data.msg)
+        }
+      })
+      this.$router.go(-1)
+      this.reload()
+    },
+    handleReject () {
+      let url = '/apply/refuse'
+      let params = {
+        id: this.$store.state.sourceApplyId,
+        comment: this.inputComment
+      }
+      this.$axios.post(url, params).then(res => {
+        if (res.status === 200) {
+          this.$message.success(res.data.msg)
+        }
+      })
+      this.$router.go(-1)
+      this.reload()
+    },
+    handleBack () {
+      this.$router.go(-1)
+    },
     getTableData () {
       let url = '/apply/detail'
       let params = {
@@ -212,6 +263,23 @@ export default {
       }
       .table-record {
         /*overflow: hidden;*/
+      }
+      .input-comment {
+        width: 95%;
+        margin: 20px 20px 0 20px;
+      }
+      .btn-pass {
+        margin: 15px 10px 15px 850px;
+        /*margin-top: 15px;*/
+        /*margin-bottom: 15px;*/
+        /*margin-left: 850px;*/
+        /*margin-right: 30px;*/
+      }
+      .btn-back {
+        margin-top: 15px;
+        margin-bottom: 15px;
+        float: right;
+        margin-right: 40px;
       }
     }
   }

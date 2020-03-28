@@ -8,6 +8,7 @@ import ApplyList from '../components/list/applyList'
 import RepairList from '../components/list/repairList'
 import MyApply from '../components/list/myApply'
 import ApplyDetail from '../components/list/applyDetail'
+import RepairDeal from '../components/list/repairDeal'
 import Apply from '../components/source/sourceApply'
 import Refresh from '../components/source/refresh'
 import Repair from '../components/source/sourceRepair'
@@ -80,6 +81,11 @@ export default new Router({
           name: 'applyDetail',
           path: '/applyDetail',
           component: ApplyDetail
+        },
+        {
+          name: 'repairDeal',
+          path: '/repairDeal',
+          component: RepairDeal
         }
       ]
     }

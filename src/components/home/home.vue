@@ -75,9 +75,13 @@
                 <i class="el-icon-location"></i>
                 <span>个人申请表</span>
               </el-menu-item>
-              <el-menu-item index="repairList">
+              <el-menu-item index="repairList" v-show="!judgeAdmin">
                 <i class="el-icon-location"></i>
-                <span>报修表</span>
+                <span>个人报修表</span>
+              </el-menu-item>
+              <el-menu-item index="repairDeal" v-show="judgeAdmin">
+                <i class="el-icon-location"></i>
+                <span>待处理报修表</span>
               </el-menu-item>
             </el-submenu>
 
@@ -115,6 +119,11 @@ export default {
     return {
       curUserName: '',
       curUserRole: ''
+    }
+  },
+  computed: {
+    judgeAdmin: function () {
+      return this.$store.state.userInfo['userType'] === 1
     }
   },
   methods: {

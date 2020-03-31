@@ -14,6 +14,7 @@ import Suggest from '../components/comment/suggest'
 import Refresh from '../components/source/refresh'
 import Repair from '../components/source/sourceRepair'
 import Register from '../components/login/register'
+import ChangePwd from '../components/personal/changePwd'
 
 Vue.use(Router)
 
@@ -92,6 +93,11 @@ export default new Router({
           name: 'suggest',
           path: '/suggest',
           component: Suggest
+        },
+        {
+          name: 'changePwd',
+          path: '/changePwd',
+          component: ChangePwd
         }
       ]
     }

@@ -97,10 +97,21 @@
             </el-submenu>
 
           <!--设置disabled可以使该菜单栏不能被点击，可以作为页面级权限的一种参考-->
-            <el-menu-item index="3" disabled>
+            <el-menu-item index="5" disabled>
               <i class="el-icon-document"></i>
               <span slot="title">导航三</span>
             </el-menu-item>
+
+            <el-submenu index="6">
+              <template slot="title">
+                <i class="el-icon-location"></i>
+                <span>个人中心</span>
+              </template>
+              <el-menu-item index="changePwd">
+                <i class="el-icon-location"></i>
+                <span>修改密码</span>
+              </el-menu-item>
+            </el-submenu>
 
           </el-menu>
         </el-aside>

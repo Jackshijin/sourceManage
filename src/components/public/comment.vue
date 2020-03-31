@@ -96,7 +96,7 @@ export default {
         }
         this.$axios.post(url, params).then(res => {
           if (res.status === 200) {
-            return
+            return res.data.msg
           } else {
             return res
           }

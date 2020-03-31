@@ -10,6 +10,7 @@ import MyApply from '../components/list/myApply'
 import ApplyDetail from '../components/list/applyDetail'
 import RepairDeal from '../components/list/repairDeal'
 import Apply from '../components/source/sourceApply'
+import Suggest from '../components/comment/suggest'
 import Refresh from '../components/source/refresh'
 import Repair from '../components/source/sourceRepair'
 import Register from '../components/login/register'
@@ -86,6 +87,11 @@ export default new Router({
           name: 'repairDeal',
           path: '/repairDeal',
           component: RepairDeal
+        },
+        {
+          name: 'suggest',
+          path: '/suggest',
+          component: Suggest
         }
       ]
     }

@@ -88,11 +88,11 @@
             <el-submenu index="4">
               <template slot="title">
                 <i class="el-icon-location"></i>
-                <span>导航一</span>
+                <span>评论&建议</span>
               </template>
-              <el-menu-item index="4-1">
+              <el-menu-item index="suggest">
                 <i class="el-icon-location"></i>
-                <span>选项一</span>
+                <span>留言评论</span>
               </el-menu-item>
             </el-submenu>
 
@@ -104,7 +104,6 @@
 
           </el-menu>
         </el-aside>
-
         <el-main class="main">
           <router-view></router-view>
         </el-main>

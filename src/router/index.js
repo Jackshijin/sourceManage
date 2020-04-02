@@ -15,6 +15,11 @@ import Refresh from '../components/source/refresh'
 import Repair from '../components/source/sourceRepair'
 import Register from '../components/login/register'
 import ChangePwd from '../components/personal/changePwd'
+import MyArticle from '../components/personal/myArticle'
+import Article from '../components/comment/article'
+import ArticleAdd from '../components/comment/articleAdd'
+import ArticleEdit from '../components/comment/articleEdit'
+import ArticleDetail from '../components/comment/articleDetail'
 
 Vue.use(Router)
 
@@ -98,6 +103,31 @@ export default new Router({
           name: 'changePwd',
           path: '/changePwd',
           component: ChangePwd
+        },
+        {
+          name: 'article',
+          path: '/article',
+          component: Article
+        },
+        {
+          name: 'articleAdd',
+          path: '/articleAdd',
+          component: ArticleAdd
+        },
+        {
+          name: 'articleEdit',
+          path: '/articleEdit',
+          component: ArticleEdit
+        },
+        {
+          name: 'articleDetail',
+          path: '/articleDetail',
+          component: ArticleDetail
+        },
+        {
+          name: 'myArticle',
+          path: '/myArticle',
+          component: MyArticle
         }
       ]
     }

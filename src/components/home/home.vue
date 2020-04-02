@@ -88,11 +88,15 @@
             <el-submenu index="4">
               <template slot="title">
                 <i class="el-icon-location"></i>
-                <span>评论&建议</span>
+                <span>建议&文章</span>
               </template>
               <el-menu-item index="suggest">
                 <i class="el-icon-location"></i>
                 <span>留言评论</span>
+              </el-menu-item>
+              <el-menu-item index="article">
+                <i class="el-icon-location"></i>
+                <span>公告文章</span>
               </el-menu-item>
             </el-submenu>
 
@@ -110,6 +114,10 @@
               <el-menu-item index="changePwd">
                 <i class="el-icon-location"></i>
                 <span>修改密码</span>
+              </el-menu-item>
+              <el-menu-item index="myArticle">
+                <i class="el-icon-location"></i>
+                <span>个人发表</span>
               </el-menu-item>
             </el-submenu>
 
@@ -241,7 +249,7 @@ export default {
         background-color: #d3dce6;
       }
       .main {
-        background-color: #e9eef3;
+        /*background-color: #e9eef3;*/
       }
     }
   }

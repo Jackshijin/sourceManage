@@ -9,9 +9,15 @@ import './assets/css/reset.css'
 import 'element-ui/lib/theme-chalk/index.css'
 import Vuex from 'vuex'
 import store from './store/store'
+import vueQuillEditor from 'vue-quill-editor' // 引入富文本工具
+// require styles 引入样式
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
 import md5 from 'js-md5'
 import moment from 'moment'
 
+Vue.use(vueQuillEditor)
 Vue.use(ElementUI)
 Vue.use(Vuex)
 Vue.config.productionTip = false

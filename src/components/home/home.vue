@@ -35,7 +35,7 @@
             <el-submenu index="1">
               <template slot="title">
                 <i class="el-icon-location"></i>
-                <span>资源列表</span>
+                <span>资源管理</span>
               </template>
               <el-menu-item index="source">
                 <i class="el-icon-location"></i>
@@ -43,7 +43,7 @@
               </el-menu-item>
               <el-menu-item index="1-2">
                 <i class="el-icon-location"></i>
-                <span>资源管理</span>
+                <span>资源相关</span>
               </el-menu-item>
             </el-submenu>
 
@@ -67,36 +67,73 @@
                 <i class="el-icon-location"></i>
                 <span>报表管理</span>
               </template>
-              <el-menu-item index="3-1">
+              <el-menu-item index="applyList">
                 <i class="el-icon-location"></i>
-                <span>申请表</span>
+                <span>待处理申请表</span>
               </el-menu-item>
-              <el-menu-item index="3-2">
+              <el-menu-item index="myApply">
                 <i class="el-icon-location"></i>
-                <span>报修表</span>
+                <span>个人申请表</span>
+              </el-menu-item>
+              <el-menu-item index="repairList" v-show="!judgeAdmin">
+                <i class="el-icon-location"></i>
+                <span>个人报修表</span>
+              </el-menu-item>
+              <el-menu-item index="repairDeal" v-show="judgeAdmin">
+                <i class="el-icon-location"></i>
+                <span>待处理报修表</span>
               </el-menu-item>
             </el-submenu>
 
             <el-submenu index="4">
               <template slot="title">
                 <i class="el-icon-location"></i>
-                <span>导航一</span>
+                <span>建议&文章</span>
               </template>
-              <el-menu-item index="4-1">
+              <el-menu-item index="suggest">
                 <i class="el-icon-location"></i>
-                <span>选项一</span>
+                <span>留言评论</span>
+              </el-menu-item>
+              <el-menu-item index="article">
+                <i class="el-icon-location"></i>
+                <span>公告文章</span>
               </el-menu-item>
             </el-submenu>
 
           <!--设置disabled可以使该菜单栏不能被点击，可以作为页面级权限的一种参考-->
-            <el-menu-item index="3" disabled>
+            <el-menu-item index="5" disabled>
               <i class="el-icon-document"></i>
               <span slot="title">导航三</span>
             </el-menu-item>
 
+            <el-submenu index="6">
+              <template slot="title">
+                <i class="el-icon-location"></i>
+                <span>个人中心</span>
+              </template>
+              <el-menu-item index="changePwd">
+                <i class="el-icon-location"></i>
+                <span>修改密码</span>
+              </el-menu-item>
+              <el-menu-item index="myArticle">
+                <i class="el-icon-location"></i>
+                <span>个人发表</span>
+              </el-menu-item>
+            </el-submenu>
+
+            <el-submenu index="7">
+              <template slot="title">
+                <i class="el-icon-location"></i>
+                <span>用户管理</span>
+              </template>
+              <el-menu-item index="userManage">
+                <i class="el-icon-location"></i>
+                <span>权限管理</span>
+              </el-menu-item>
+            </el-submenu>
+
           </el-menu>
         </el-aside>
-
         <el-main class="main">
           <router-view></router-view>
         </el-main>
@@ -111,6 +148,11 @@ export default {
     return {
       curUserName: '',
       curUserRole: ''
+    }
+  },
+  computed: {
+    judgeAdmin: function () {
+      return this.$store.state.userInfo['userType'] === 1
     }
   },
   methods: {
@@ -155,13 +197,13 @@ export default {
   created () {
     this.curUserName = this.$store.state.userInfo['userName']
     let curUserType = localStorage.getItem('userInfo').userType
-    if (curUserType > 1) {
+    if (curUserType !== 1) {
       this.curUserRole = '普通用户'
     } else {
       this.curUserRole = '管理员'
     }
-    console.log(this.curUserRole)
-    console.log(this.curUserName)
+    // console.log(this.curUserRole)
+    // console.log(this.curUserName)
   }
 }
 </script>
@@ -218,7 +260,7 @@ export default {
         background-color: #d3dce6;
       }
       .main {
-        background-color: #e9eef3;
+        /*background-color: #e9eef3;*/
       }
     }
   }

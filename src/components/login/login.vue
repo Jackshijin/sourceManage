@@ -65,6 +65,7 @@ export default {
                 let data = res.data
                 console.log(data)
                 const userData = {
+                  userId: data.id,
                   userName: data.name,
                   userType: data.type,
                   userEmail: data.email

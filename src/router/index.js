@@ -23,6 +23,7 @@ import ArticleDetail from '../components/comment/articleDetail'
 import UserManage from '../components/user/userManage'
 import ChartIndex from '../components/charts/chartIndex'
 import ChartAnalyze from '../components/charts/chartAnalyze'
+import DashBoard from '../components/dashBoard/dashBoard'
 
 Vue.use(Router)
 
@@ -146,6 +147,11 @@ export default new Router({
           name: 'chartAnalyze',
           path: '/chartAnalyze',
           component: ChartAnalyze
+        },
+        {
+          name: 'dashBoard',
+          path: '/dashBoard',
+          component: DashBoard
         }
       ]
     }

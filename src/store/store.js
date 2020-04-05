@@ -11,9 +11,13 @@ const store = new Vuex.Store({
     curSourceName: '',
     curSourceType: '',
     userInfo: !localStorage.getItem('userInfo') ? {} : JSON.parse(localStorage.getItem('userInfo')),
-    pageSize: 10 // 每页请求多少条数据
+    pageSize: 10, // 每页请求多少条数据
+    setLineChartData: ''
   },
   mutations: {
+    handleSetLineChartData (state, type) {
+      state.setLineChartData = type
+    },
     getSourceApplyId (state, id) {
       state.sourceApplyId = id
     },

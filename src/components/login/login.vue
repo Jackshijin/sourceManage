@@ -72,6 +72,7 @@ export default {
                 }
                 this.$store.dispatch('saveUserInfo', userData)
                 localStorage.setItem('userInfo', JSON.stringify(userData))
+                // this.$router.push({name: 'selfInfo'})
                 this.$router.push({name: 'home'})
                 this.$message.success('登录成功')
               } else {

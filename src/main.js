@@ -16,6 +16,7 @@ import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 import md5 from 'js-md5'
 import moment from 'moment'
+import './icons'
 
 Vue.use(vueQuillEditor)
 Vue.use(ElementUI)

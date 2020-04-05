@@ -21,6 +21,8 @@ import ArticleAdd from '../components/comment/articleAdd'
 import ArticleEdit from '../components/comment/articleEdit'
 import ArticleDetail from '../components/comment/articleDetail'
 import UserManage from '../components/user/userManage'
+import ChartIndex from '../components/charts/chartIndex'
+import ChartAnalyze from '../components/charts/chartAnalyze'
 
 Vue.use(Router)
 
@@ -134,6 +136,16 @@ export default new Router({
           name: 'userManage',
           path: '/userManage',
           component: UserManage
+        },
+        {
+          name: 'chartIndex',
+          path: '/chartIndex',
+          component: ChartIndex
+        },
+        {
+          name: 'chartAnalyze',
+          path: '/chartAnalyze',
+          component: ChartAnalyze
         }
       ]
     }

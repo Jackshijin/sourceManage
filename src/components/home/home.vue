@@ -52,13 +52,13 @@
                 <i class="el-icon-location"></i>
                 <span>数据统计</span>
               </template>
-              <el-menu-item index="2-1">
+              <el-menu-item index="chartIndex">
                 <i class="el-icon-location"></i>
                 <span>使用情况</span>
               </el-menu-item>
-              <el-menu-item index="2-2">
+              <el-menu-item index="chartAnalyze">
                 <i class="el-icon-location"></i>
-                <span>故障情况</span>
+                <span>数据分析</span>
               </el-menu-item>
             </el-submenu>
 

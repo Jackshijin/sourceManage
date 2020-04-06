@@ -15,12 +15,10 @@ const store = new Vuex.Store({
     setLineChartData: ''
   },
   mutations: {
-<<<<<<< HEAD
-=======
+
     handleSetLineChartData (state, type) {
       state.setLineChartData = type
     },
->>>>>>> dev-user
     getSourceApplyId (state, id) {
       state.sourceApplyId = id
     },

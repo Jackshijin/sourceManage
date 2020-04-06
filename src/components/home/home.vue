@@ -38,12 +38,8 @@
             </el-menu-item>
             <el-submenu index="1">
               <template slot="title">
-<<<<<<< HEAD
-                <i class="el-icon-location"></i>
-=======
                 <svg-icon icon-class="ziyuan" className="icon"></svg-icon>
                 <!--<i class="el-icon-location"></i>-->
->>>>>>> dev-user
                 <span>资源管理</span>
               </template>
               <el-menu-item index="source">
@@ -78,53 +74,30 @@
                 <svg-icon icon-class="baobiao" className="icon"></svg-icon>
                 <span>报表管理</span>
               </template>
-              <el-menu-item index="applyList">
-<<<<<<< HEAD
-                <i class="el-icon-location"></i>
-                <span>待处理申请表</span>
-              </el-menu-item>
-              <el-menu-item index="myApply">
-                <i class="el-icon-location"></i>
-                <span>个人申请表</span>
-              </el-menu-item>
-              <el-menu-item index="repairList" v-show="!judgeAdmin">
-                <i class="el-icon-location"></i>
-                <span>个人报修表</span>
-              </el-menu-item>
-              <el-menu-item index="repairDeal" v-show="judgeAdmin">
-                <i class="el-icon-location"></i>
-=======
+
+              <el-menu-item index="applyList" v-show="judgeAdmin">
                 <svg-icon icon-class="baobiao_1" className="icon"></svg-icon>
                 <span>待处理申请表</span>
               </el-menu-item>
+
               <el-menu-item index="myApply">
                 <svg-icon icon-class="liebiao" className="icon"></svg-icon>
                 <span>个人申请表</span>
               </el-menu-item>
+
               <el-menu-item index="repairList" v-show="!judgeAdmin">
                 <svg-icon icon-class="liebiao" className="icon"></svg-icon>
                 <span>个人报修表</span>
               </el-menu-item>
+
               <el-menu-item index="repairDeal" v-show="judgeAdmin">
                 <svg-icon icon-class="form" className="icon"></svg-icon>
->>>>>>> dev-user
                 <span>待处理报修表</span>
               </el-menu-item>
             </el-submenu>
 
             <el-submenu index="4">
               <template slot="title">
-<<<<<<< HEAD
-                <i class="el-icon-location"></i>
-                <span>建议&文章</span>
-              </template>
-              <el-menu-item index="suggest">
-                <i class="el-icon-location"></i>
-                <span>留言评论</span>
-              </el-menu-item>
-              <el-menu-item index="article">
-                <i class="el-icon-location"></i>
-=======
                 <svg-icon icon-class="article" className="icon"></svg-icon>
                 <span>建议&文章</span>
               </template>
@@ -134,33 +107,21 @@
               </el-menu-item>
               <el-menu-item index="article">
                 <svg-icon icon-class="post" className="icon"></svg-icon>
->>>>>>> dev-user
                 <span>公告文章</span>
               </el-menu-item>
             </el-submenu>
 
-          <!--设置disabled可以使该菜单栏不能被点击，可以作为页面级权限的一种参考-->
-<<<<<<< HEAD
-            <el-menu-item index="5" disabled>
-              <i class="el-icon-document"></i>
-              <span slot="title">导航三</span>
-            </el-menu-item>
-=======
-
             <el-submenu index="6">
               <template slot="title">
                 <svg-icon icon-class="personal" className="icon"></svg-icon>
-                <!--<i class="el-icon-location"></i>-->
                 <span>个人中心</span>
               </template>
               <el-menu-item index="changePwd">
                 <svg-icon icon-class="mima" className="icon"></svg-icon>
-                <!--<i class="el-icon-location"></i>-->
                 <span>修改密码</span>
               </el-menu-item>
               <el-menu-item index="myArticle">
                 <svg-icon icon-class="publish" className="icon"></svg-icon>
-                <!--<i class="el-icon-location"></i>-->
                 <span>个人发表</span>
               </el-menu-item>
             </el-submenu>
@@ -168,29 +129,11 @@
             <el-submenu index="7">
               <template slot="title">
                 <svg-icon icon-class="usermanage" className="icon"></svg-icon>
-                <!--<i class="el-icon-location"></i>-->
                 <span>用户管理</span>
               </template>
               <el-menu-item index="userManage">
                 <svg-icon icon-class="permission" className="icon"></svg-icon>
-                <!--<i class="el-icon-location"></i>-->
                 <span>权限管理</span>
-              </el-menu-item>
-            </el-submenu>
->>>>>>> dev-user
-
-            <el-submenu index="6">
-              <template slot="title">
-                <i class="el-icon-location"></i>
-                <span>个人中心</span>
-              </template>
-              <el-menu-item index="changePwd">
-                <i class="el-icon-location"></i>
-                <span>修改密码</span>
-              </el-menu-item>
-              <el-menu-item index="myArticle">
-                <i class="el-icon-location"></i>
-                <span>个人发表</span>
               </el-menu-item>
             </el-submenu>
 

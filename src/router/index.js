@@ -20,13 +20,11 @@ import Article from '../components/comment/article'
 import ArticleAdd from '../components/comment/articleAdd'
 import ArticleEdit from '../components/comment/articleEdit'
 import ArticleDetail from '../components/comment/articleDetail'
-<<<<<<< HEAD
-=======
+
 import UserManage from '../components/user/userManage'
 import ChartIndex from '../components/charts/chartIndex'
 import ChartAnalyze from '../components/charts/chartAnalyze'
 import DashBoard from '../components/dashBoard/dashBoard'
->>>>>>> dev-user
 
 Vue.use(Router)
 
@@ -135,8 +133,6 @@ const router = new Router({
           name: 'myArticle',
           path: '/myArticle',
           component: MyArticle
-<<<<<<< HEAD
-=======
         },
         {
           name: 'userManage',
@@ -157,7 +153,6 @@ const router = new Router({
           name: 'dashBoard',
           path: '/dashBoard',
           component: DashBoard
->>>>>>> dev-user
         }
       ]
     }

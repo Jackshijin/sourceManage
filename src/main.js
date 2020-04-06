@@ -16,10 +16,18 @@ import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 import md5 from 'js-md5'
 import moment from 'moment'
+import './icons'
+import Router from 'vue-router'
 
 Vue.use(vueQuillEditor)
 Vue.use(ElementUI)
 Vue.use(Vuex)
+
+// 解决点击当前路由报错的bug
+const originalPush = Router.prototype.push
+Router.prototype.push = function push (location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 Vue.config.productionTip = false
 axios.defaults.baseURL = 'http://127.0.0.1:5050'
 axios.defaults.withCredentials = true // 每次请求,无论是否跨域,都带上cookie信息

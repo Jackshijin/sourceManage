@@ -18,7 +18,11 @@
       <el-table-column prop="author" label="创建者" align="center"></el-table-column>
       <el-table-column prop="create_time" label="创建时间" align="center"></el-table-column>
       <el-table-column prop="update_time" label="更新时间" align="center"></el-table-column>
+<<<<<<< HEAD
       <el-table-column label="操作" align="center" width="180">
+=======
+      <el-table-column label="操作" align="center" width="180" v-show="judgeAdmin">
+>>>>>>> dev-user
         <template slot-scope="scope">
           <el-button
             size="mini"
@@ -61,6 +65,14 @@ export default {
   created () {
     this.getMyArticle()
   },
+<<<<<<< HEAD
+=======
+  computed: {
+    judgeAdmin: function () {
+      return this.$store.state.userInfo['userType'] === 1
+    }
+  },
+>>>>>>> dev-user
   methods: {
     // 获取个人发表的文章和公告
     getMyArticle () {

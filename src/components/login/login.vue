@@ -72,8 +72,10 @@ export default {
                 }
                 this.$store.dispatch('saveUserInfo', userData)
                 localStorage.setItem('userInfo', JSON.stringify(userData))
-                this.$router.push({name: 'home'})
+                // this.$router.push({name: 'selfInfo'})
+
                 this.$message.success('登录成功')
+                this.$router.push({name: 'dashBoard'})
               } else {
                 this.$message.error('账号或密码不正确！')
               }

@@ -20,14 +20,21 @@ import Article from '../components/comment/article'
 import ArticleAdd from '../components/comment/articleAdd'
 import ArticleEdit from '../components/comment/articleEdit'
 import ArticleDetail from '../components/comment/articleDetail'
+<<<<<<< HEAD
+=======
+import UserManage from '../components/user/userManage'
+import ChartIndex from '../components/charts/chartIndex'
+import ChartAnalyze from '../components/charts/chartAnalyze'
+import DashBoard from '../components/dashBoard/dashBoard'
+>>>>>>> dev-user
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     // {
     //   path: '/',
-    //   redirect: '/login'
+    //   redirect: '/home'
     // },
     {
       name: 'login',
@@ -128,9 +135,50 @@ export default new Router({
           name: 'myArticle',
           path: '/myArticle',
           component: MyArticle
+<<<<<<< HEAD
+=======
+        },
+        {
+          name: 'userManage',
+          path: '/userManage',
+          component: UserManage
+        },
+        {
+          name: 'chartIndex',
+          path: '/chartIndex',
+          component: ChartIndex
+        },
+        {
+          name: 'chartAnalyze',
+          path: '/chartAnalyze',
+          component: ChartAnalyze
+        },
+        {
+          name: 'dashBoard',
+          path: '/dashBoard',
+          component: DashBoard
+>>>>>>> dev-user
         }
       ]
     }
   ],
   mode: 'history'
 })
+
+router.beforeEach((to, from, next) => {
+  // console.log(to, from)
+  const nextRoute = ['home', 'source', 'sourceApply', 'sourceRepair', 'selfInfo', 'applyList', 'repairList', 'myApply', 'applyDetail', 'repairDetail', 'suggest', 'changePwd', 'article', 'articleAdd', 'articleEdit', 'articleDetail', 'myArticle', 'userManage', 'chartIndex', 'chartAnalyze', 'dashBoard']
+  let userInfo = localStorage.getItem('userInfo')
+  if (nextRoute.indexOf(to.name) >= 0) {
+    if (!userInfo) {
+      router.push({name: 'login'})
+    }
+  }
+  if (to.name === 'login') {
+    if (userInfo) {
+      router.push({name: 'home'})
+    }
+  }
+  next()
+})
+export default router

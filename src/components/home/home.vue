@@ -38,11 +38,12 @@
             </el-menu-item>
             <el-submenu index="1">
               <template slot="title">
-                <i class="el-icon-location"></i>
+                <svg-icon icon-class="ziyuan" className="icon"></svg-icon>
+                <!--<i class="el-icon-location"></i>-->
                 <span>资源管理</span>
               </template>
               <el-menu-item index="source">
-                <i class="el-icon-location"></i>
+                <svg-icon icon-class="resource" className="icon"></svg-icon>
                 <span>资源列表</span>
               </el-menu-item>
               <el-menu-item index="1-2">
@@ -53,53 +54,55 @@
 
             <el-submenu index="2">
               <template slot="title">
-                <i class="el-icon-location"></i>
+                <svg-icon icon-class="shuju" className="icon"></svg-icon>
                 <span>数据统计</span>
               </template>
               <el-menu-item index="chartIndex">
-                <i class="el-icon-location"></i>
+                <svg-icon icon-class="forms" className="icon"></svg-icon>
+                <!--<i class="el-icon-location"></i>-->
                 <span>使用情况</span>
               </el-menu-item>
               <el-menu-item index="chartAnalyze">
-                <i class="el-icon-location"></i>
+                <svg-icon icon-class="data" className="icon"></svg-icon>
+                <!--<i class="el-icon-location"></i>-->
                 <span>数据分析</span>
               </el-menu-item>
             </el-submenu>
 
             <el-submenu index="3">
               <template slot="title">
-                <i class="el-icon-location"></i>
+                <svg-icon icon-class="baobiao" className="icon"></svg-icon>
                 <span>报表管理</span>
               </template>
               <el-menu-item index="applyList">
-                <i class="el-icon-location"></i>
+                <svg-icon icon-class="baobiao_1" className="icon"></svg-icon>
                 <span>待处理申请表</span>
               </el-menu-item>
               <el-menu-item index="myApply">
-                <i class="el-icon-location"></i>
+                <svg-icon icon-class="liebiao" className="icon"></svg-icon>
                 <span>个人申请表</span>
               </el-menu-item>
               <el-menu-item index="repairList" v-show="!judgeAdmin">
-                <i class="el-icon-location"></i>
+                <svg-icon icon-class="liebiao" className="icon"></svg-icon>
                 <span>个人报修表</span>
               </el-menu-item>
               <el-menu-item index="repairDeal" v-show="judgeAdmin">
-                <i class="el-icon-location"></i>
+                <svg-icon icon-class="form" className="icon"></svg-icon>
                 <span>待处理报修表</span>
               </el-menu-item>
             </el-submenu>
 
             <el-submenu index="4">
               <template slot="title">
-                <i class="el-icon-location"></i>
+                <svg-icon icon-class="article" className="icon"></svg-icon>
                 <span>建议&文章</span>
               </template>
               <el-menu-item index="suggest">
-                <i class="el-icon-location"></i>
+                <svg-icon icon-class="comment" className="icon"></svg-icon>
                 <span>留言评论</span>
               </el-menu-item>
               <el-menu-item index="article">
-                <i class="el-icon-location"></i>
+                <svg-icon icon-class="post" className="icon"></svg-icon>
                 <span>公告文章</span>
               </el-menu-item>
             </el-submenu>
@@ -108,26 +111,31 @@
 
             <el-submenu index="6">
               <template slot="title">
-                <i class="el-icon-location"></i>
+                <svg-icon icon-class="personal" className="icon"></svg-icon>
+                <!--<i class="el-icon-location"></i>-->
                 <span>个人中心</span>
               </template>
               <el-menu-item index="changePwd">
-                <i class="el-icon-location"></i>
+                <svg-icon icon-class="mima" className="icon"></svg-icon>
+                <!--<i class="el-icon-location"></i>-->
                 <span>修改密码</span>
               </el-menu-item>
               <el-menu-item index="myArticle">
-                <i class="el-icon-location"></i>
+                <svg-icon icon-class="publish" className="icon"></svg-icon>
+                <!--<i class="el-icon-location"></i>-->
                 <span>个人发表</span>
               </el-menu-item>
             </el-submenu>
 
             <el-submenu index="7">
               <template slot="title">
-                <i class="el-icon-location"></i>
+                <svg-icon icon-class="usermanage" className="icon"></svg-icon>
+                <!--<i class="el-icon-location"></i>-->
                 <span>用户管理</span>
               </template>
               <el-menu-item index="userManage">
-                <i class="el-icon-location"></i>
+                <svg-icon icon-class="permission" className="icon"></svg-icon>
+                <!--<i class="el-icon-location"></i>-->
                 <span>权限管理</span>
               </el-menu-item>
             </el-submenu>
@@ -258,6 +266,16 @@ export default {
     .container-second {
       .aside {
         background-color: #d3dce6;
+
+        .icon {
+          width: 1.3em;
+          height: 1.2em;
+          margin-right: 8px;
+          vertical-align: center;
+        }
+        h3 {
+          text-align: center;
+        }
       }
       .main {
         /*background-color: #e9eef3;*/

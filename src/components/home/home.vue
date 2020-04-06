@@ -46,10 +46,10 @@
                 <svg-icon icon-class="resource" className="icon"></svg-icon>
                 <span>资源列表</span>
               </el-menu-item>
-              <el-menu-item index="1-2">
-                <i class="el-icon-location"></i>
-                <span>资源相关</span>
-              </el-menu-item>
+              <!--<el-menu-item index="1-2">-->
+                <!--<i class="el-icon-location"></i>-->
+                <!--<span>资源相关</span>-->
+              <!--</el-menu-item>-->
             </el-submenu>
 
             <el-submenu index="2">

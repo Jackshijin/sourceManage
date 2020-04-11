@@ -122,7 +122,7 @@
               </el-menu-item>
             </el-submenu>
 
-            <el-submenu index="7">
+            <el-submenu index="7" v-show="judgeAdmin">
               <template slot="title">
                 <svg-icon icon-class="usermanage" className="icon"></svg-icon>
                 <span>用户管理</span>

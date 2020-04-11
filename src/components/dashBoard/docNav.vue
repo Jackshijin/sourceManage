@@ -2,38 +2,38 @@
   <div class="document-container">
     <el-row :gutter="10" type="flex">
       <el-col>
-        <a class="document-btn" target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/">Vue.js官网</a>
+        <a class="document-btn" target="_blank" href="https://cn.vuejs.org/">Vue.js官网</a>
       </el-col>
       <el-col>
-        <a class="document-btn" target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/">Vue.js官网</a>
+        <a class="document-btn" target="_blank" href="https://www.expressjs.com.cn/">Express.js官网</a>
       </el-col>
 
     </el-row>
 
     <el-row :gutter="10" type="flex">
       <el-col>
-        <a class="document-btn" target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/">Vue.js官网</a>
+        <a class="document-btn" target="_blank" href="https://element.eleme.cn/#/zh-CN">ElementUI</a>
       </el-col>
       <el-col>
-        <a class="document-btn" target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/">Vue.js官网</a>
-      </el-col>
-    </el-row>
-
-    <el-row :gutter="10" type="flex">
-      <el-col>
-        <a class="document-btn" target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/">Vue.js官网</a>
-      </el-col>
-      <el-col>
-        <a class="document-btn" target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/">Vue.js官网</a>
+        <a class="document-btn" target="_blank" href="https://www.echartsjs.com/zh/">Echarts图表</a>
       </el-col>
     </el-row>
 
     <el-row :gutter="10" type="flex">
       <el-col>
-        <a class="document-btn" target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/">Vue.js官网</a>
+        <a class="document-btn" target="_blank" href="https://www.jnu.edu.cn/">学校官网</a>
       </el-col>
       <el-col>
-        <a class="document-btn" target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/">Vue.js官网</a>
+        <a class="document-btn" target="_blank" href="https://jwc-443.webvpn.jnu.edu.cn/">教务处</a>
+      </el-col>
+    </el-row>
+
+    <el-row :gutter="10" type="flex">
+      <el-col>
+        <a class="document-btn" target="_blank" href="https://lib.jnu.edu.cn/">图书馆</a>
+      </el-col>
+      <el-col>
+        <a class="document-btn" target="_blank" href="https://netc.jnu.edu.cn/">网络技术中心</a>
       </el-col>
     </el-row>
 

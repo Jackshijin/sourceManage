@@ -10,7 +10,7 @@ const store = new Vuex.Store({
     curSourceId: '', // 保存资源id值
     curSourceName: '',
     curSourceType: '',
-    userInfo: !localStorage.getItem('userInfo') ? {} : JSON.parse(localStorage.getItem('userInfo')),
+    userInfo: !sessionStorage.getItem('userInfo') ? {} : JSON.parse(sessionStorage.getItem('userInfo')),
     pageSize: 10, // 每页请求多少条数据
     setLineChartData: ''
   },

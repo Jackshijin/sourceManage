@@ -197,7 +197,7 @@ export default {
   },
   created () {
     this.curUserName = this.$store.state.userInfo['userName']
-    let curUserType = localStorage.getItem('userInfo').userType
+    let curUserType = sessionStorage.getItem('userInfo').userType
     if (curUserType !== 1) {
       this.curUserRole = '普通用户'
     } else {

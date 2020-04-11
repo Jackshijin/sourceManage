@@ -71,7 +71,7 @@ export default {
                   userEmail: data.email
                 }
                 this.$store.dispatch('saveUserInfo', userData)
-                localStorage.setItem('userInfo', JSON.stringify(userData))
+                sessionStorage.setItem('userInfo', JSON.stringify(userData))
                 // this.$router.push({name: 'selfInfo'})
 
                 this.$message.success('登录成功')

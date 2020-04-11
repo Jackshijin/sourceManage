@@ -163,7 +163,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   // console.log(to, from)
   const nextRoute = ['home', 'source', 'sourceApply', 'sourceRepair', 'selfInfo', 'applyList', 'repairList', 'myApply', 'applyDetail', 'repairDetail', 'suggest', 'changePwd', 'article', 'articleAdd', 'articleEdit', 'articleDetail', 'myArticle', 'userManage', 'chartIndex', 'chartAnalyze', 'dashBoard']
-  let userInfo = localStorage.getItem('userInfo')
+  let userInfo = sessionStorage.getItem('userInfo')
   if (nextRoute.indexOf(to.name) >= 0) {
     if (!userInfo) {
       router.push({name: 'login'})

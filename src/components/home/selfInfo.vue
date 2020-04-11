@@ -29,7 +29,7 @@ export default {
     }
   },
   created () {
-    let info = JSON.parse(localStorage.getItem('userInfo'))
+    let info = JSON.parse(sessionStorage.getItem('userInfo'))
     this.name = info.userName
     this.role = info.userType > 1 ? '普通用户' : '管理员'
     this.email = info.userEmail || '空'

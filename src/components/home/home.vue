@@ -185,7 +185,7 @@ export default {
       this.$axios.get('/user/logout', {}).then(res => {
         const data = res.data
         if (data.code === 200) {
-          localStorage.clear()
+          sessionStorage.clear()
           this.$store.dispatch('saveUserInfo', {})
           this.$router.replace('/')
           this.$message.success('退出成功')

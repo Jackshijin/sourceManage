@@ -53,7 +53,7 @@
         <el-table
           v-loading="!this.regFlag.search"
           :data="tableData"
-          height="250"
+          height="400"
           border
           style="width: 100%">
           <el-table-column

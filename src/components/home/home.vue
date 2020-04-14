@@ -71,7 +71,7 @@
                 <span>报表管理</span>
               </template>
 
-              <el-menu-item index="applyList" v-show="judgeAdmin">
+              <el-menu-item index="applyList">
                 <svg-icon icon-class="baobiao_1" className="icon"></svg-icon>
                 <span>待处理申请表</span>
               </el-menu-item>
@@ -173,10 +173,10 @@ export default {
     },
     toHome () {
       // 当前页就是首页不跳转，处理报错
-      if (this.$route.name === 'home') {
+      if (this.$route.name === 'dashBoard') {
         this.$message.warning('当前页面就是首页')
       } else {
-        this.$router.push({name: 'home'})
+        this.$router.push({name: 'dashBoard'})
         console.log('去首页')
         // console.log(this.$route.name)
       }

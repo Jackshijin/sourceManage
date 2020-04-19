@@ -12,7 +12,13 @@
         <el-button type="primary" @click="submitLogin('formData')">登录</el-button>
         <el-button @click="resetForm('formData')">重置</el-button>
       </el-form-item>
+      <p>
+        还没有账号？
+        <span @click.prevent="goToRegister()" class="reg-text"><em>立即注册</em></span>
+      </p>
     </el-form>
+    <div class="register">
+    </div>
   </div>
 </template>
 
@@ -50,6 +56,9 @@ export default {
   components: {
   },
   methods: {
+    goToRegister () {
+      this.$router.push({name: 'register'})
+    },
     submitLogin (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
@@ -122,6 +131,10 @@ export default {
       }
       .btn-box{
         text-align: center;
+      }
+      .reg-text {
+        cursor: pointer;
+        color: #3a8ee6;
       }
     }
   }

@@ -1,6 +1,8 @@
 <template>
   <div class="page-register">
+    <!--<div class="hr-10"></div>-->
     <section>
+      <h2>校园资源管理系统注册</h2>
       <el-form
         :model="ruleForm"
         :rules="rules"
@@ -96,10 +98,68 @@ export default {
   },
   methods: {
     sendMsg () {
-
+      const self = this
+      let namePass
+      let emailPass
+      if (self.timeId) {
+        return false
+      }
+      this.$refs.ruleForm.validateField('name', (valid) => {
+        namePass = valid
+      })
+      self.statusMsg = ''
+      if (namePass) {
+        return false
+      }
+      this.$refs.ruleForm.validateField('email', (valid) => {
+        emailPass = valid
+      })
+      if (!namePass && !emailPass) {
+        self.$axios.post('/user/verify', {
+          userName: encodeURIComponent(self.ruleForm.name),
+          email: self.ruleForm.email
+        }).then(({status, data}) => {
+          if (status === 200 && data.code === 200) {
+            let count = 60
+            self.statusMsg = `验证码已发送，剩余${count--}秒`
+            self.timeId = setInterval(function () {
+              self.statusMsg = `验证码已发送，剩余${count--}秒`
+              if (count === 0) {
+                clearInterval(self.timeId)
+              }
+            }, 1000)
+          } else {
+            self.statusMsg = data.msg
+          }
+        })
+      }
     },
     register () {
-
+      const self = this
+      this.$refs.ruleForm.validate((valid) => {
+        if (valid) {
+          self.$axios.post('/user/signup', {
+            userName: window.encodeURIComponent(self.ruleForm.name),
+            password: self.ruleForm.pwd,
+            email: self.ruleForm.email,
+            code: self.ruleForm.code
+          }).then(({ status, data }) => {
+            if (status === 200) {
+              if (data && data.code === 200) {
+                this.$message.success(data.msg)
+                this.$router.push({name: 'login'})
+              } else {
+                self.error = data.msg
+              }
+            } else {
+              self.error = `服务器出错，错误码:${status}`
+            }
+            setTimeout(function () {
+              self.error = ''
+            }, 1500)
+          })
+        }
+      })
     },
     resetForm (formName) {
       this.$refs[formName].resetFields()
@@ -110,8 +170,18 @@ export default {
 
 <style lang="scss">
   .page-register {
+    /*.hr-10{*/
+      /*margin-top:50px;*/
+      /*text-align: center;*/
+      /*width:80%;*/
+      /*height:10px;*/
+      /*background:dodgerblue;*/
+    /*}*/
+    h2 {
+      text-align: center;
+    }
     > section {
-      margin: 0 auto 30px;
+      margin: 20px auto 30px;
       padding-top: 30px;
       width: 980px;
       min-height: 300px;

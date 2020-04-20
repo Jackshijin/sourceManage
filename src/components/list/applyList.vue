@@ -193,11 +193,11 @@ export default {
         id: this.sourceApplyId
       }
       this.$axios.post(url, params).then(res => {
-        console.log(res)
+        // console.log(res)
         if (res.status === 200) {
           this.$message.success(res.data.msg)
           this.reload()
-          console.log(res.data.msg)
+          // console.log(res.data.msg)
         }
       })
       this.dialogSubmitVisible = false
@@ -279,11 +279,11 @@ export default {
     },
     handleSubmit (list) {
       this.sourceApplyId = list.id
-      console.log(list)
+      // console.log(list)
       this.dialogSubmitVisible = true
     },
     getDetail (list) {
-      console.log(list)
+      // console.log(list)
       this.$store.commit('getSourceApplyId', list.id)
       this.$router.push({name: 'applyDetail'})
     }

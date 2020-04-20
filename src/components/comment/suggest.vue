@@ -41,7 +41,7 @@ export default {
             }
           })
           this.commentData = this.comment
-          console.log(this.comment)
+          // console.log(this.comment)
         }
       })
     },

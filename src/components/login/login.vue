@@ -72,7 +72,7 @@ export default {
             this.$axios.post(url, params).then(res => {
               if (res.data.code === 200) {
                 let data = res.data
-                console.log(data)
+                // console.log(data)
                 const userData = {
                   userId: data.id,
                   userName: data.name,

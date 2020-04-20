@@ -77,7 +77,7 @@ export default {
       }
       this.$axios.post(url, params).then(res => {
         if (res.status === 200) {
-          console.log(res.data)
+          // console.log(res.data)
           let data = res.data.data
           this.formData = {
             title: data.title,
@@ -120,7 +120,7 @@ export default {
   },
   created () {
     this.id = this.$route.query.id
-    console.log(this.id)
+    // console.log(this.id)
     this.getArticleDetail()
   }
 }

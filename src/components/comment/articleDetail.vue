@@ -46,9 +46,9 @@ export default {
         id: this.id
       }
       this.$axios.post(url, params).then(res => {
-        console.log(res)
+        // console.log(res)
         if (res.status === 200) {
-          console.log(res)
+          // console.log(res)
           let data = res.data.data
           this.formData = {
             title: data.title,

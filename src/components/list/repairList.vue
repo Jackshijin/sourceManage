@@ -71,7 +71,7 @@ export default {
       this.$axios.post(url, {}).then(res => {
         if (res.status === 200) {
           this.tableData = res.data.data
-          console.log(res)
+          // console.log(res)
         }
       })
     }

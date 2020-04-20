@@ -137,12 +137,12 @@ export default {
               } else {
                 this.$message.error(res.statusText)
               }
-              console.log(res.status)
-              console.log(res.data)
+              // console.log(res.status)
+              // console.log(res.data)
             })
           }
         } else {
-          console.log('error submit!!')
+          // console.log('error submit!!')
           return false
         }
         this.regFlag = true

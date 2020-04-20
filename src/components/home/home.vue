@@ -177,7 +177,7 @@ export default {
         this.$message.warning('当前页面就是首页')
       } else {
         this.$router.push({name: 'dashBoard'})
-        console.log('去首页')
+        // console.log('去首页')
         // console.log(this.$route.name)
       }
     },

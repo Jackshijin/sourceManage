@@ -329,7 +329,7 @@ export default {
             this.$message.success(resData.message)
           } else {
             this.$message.error(resData.message)
-            console.log('error')
+            // console.log('error')
           }
           this.regFlag.search = true
         })
@@ -355,7 +355,7 @@ export default {
             // this.$message.success(resData.message)
           } else {
             this.$message.error(resData.message)
-            console.log('error')
+            // console.log('error')
           }
           this.regFlag.search = true
         })
@@ -417,8 +417,8 @@ export default {
 
     handleCurrentChange (val) {
       this.pageNum = val
-      console.log(val)
-      console.log(this.tableData)
+      // console.log(val)
+      // console.log(this.tableData)
       this.onSearch()
     },
     handleResetSearch () {
@@ -433,7 +433,7 @@ export default {
     },
     // 管理员点击删除或编辑按钮触发方法
     handleEdit (source) {
-      console.log(source)
+      // console.log(source)
       this.$store.commit('getSourceId', source.id)
       this.editDialogFormVisible = true
       this.editForm = source
@@ -446,7 +446,7 @@ export default {
       this.onSearch()
     },
     confirmEditDialogForm () {
-      console.log(this.editForm)
+      // console.log(this.editForm)
       // 更新数据，发送请求
       if (this.regFlag.edit) {
         this.regFlag.edit = false
@@ -460,7 +460,7 @@ export default {
         let url = '/source/update'
         this.$axios.post(url, params).then(res => {
           if (res.status === 200) {
-            console.log(res)
+            // console.log(res)
             this.$message.success(res.data.msg)
             this.onSearch()
           } else {
@@ -472,7 +472,7 @@ export default {
       this.editDialogFormVisible = false
     },
     handleDelete (source) {
-      console.log(source)
+      // console.log(source)
       this.$confirm('此操作将永久删除该资源, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',

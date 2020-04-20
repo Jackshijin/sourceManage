@@ -222,7 +222,7 @@ export default {
       this.formData2 = user
       this.dialogFormVisible2 = true
       this.id = user.id
-      console.log(user)
+      // console.log(user)
     },
     handleDelete (id) {
       const url = '/user/delete'

@@ -169,7 +169,7 @@ export default {
           this.$message.success(res.data.msg)
           this.showItemId = ''
           this.reload()
-          console.log(res)
+          // console.log(res)
         })
       } else {
         // 回复小评论
@@ -200,7 +200,7 @@ export default {
       this.inputComment = ''
       this.showItemId = item.id
       this.commentArr = item
-      console.log(item)
+      // console.log(item)
     },
     showInputTwo (item, reply) {
       this.commentFlag = true
@@ -209,21 +209,21 @@ export default {
       this.showItemId = item.id
       this.commentArr = item
       this.replyArr = reply
-      console.log(item)
-      console.log(reply)
+      // console.log(item)
+      // console.log(reply)
     },
     showInputThree (item) {
       this.commentFlag = false
       this.replyFlag = false
       this.inputComment = ''
       this.showItemId = item.id
-      console.log(item)
+      // console.log(item)
     },
     showCommentInput (item, reply) {
       if (reply) {
         this.inputComment = '@' + reply.from_name + ''
-        console.log(item)
-        console.log(reply)
+        // console.log(item)
+        // console.log(reply)
       } else {
         this.inputComment = ''
       }
@@ -231,7 +231,7 @@ export default {
     }
   },
   created () {
-    console.log(imgUrl)
+    // console.log(imgUrl)
   }
 }
 </script>

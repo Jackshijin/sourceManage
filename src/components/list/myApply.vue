@@ -81,7 +81,7 @@ export default {
             }
           })
           this.myData = resData
-          console.log(res.data)
+          // console.log(res.data)
         }
         // console.log(res)
       })

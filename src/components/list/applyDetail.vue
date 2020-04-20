@@ -204,7 +204,7 @@ export default {
         this.tableInfo = tableInfo
         this.tableDetail = tableDetail
         this.tableRecord = tableRecord
-        console.log(res)
+        // console.log(res)
       })
     }
   }

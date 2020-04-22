@@ -29,7 +29,9 @@ Router.prototype.push = function push (location) {
   return originalPush.call(this, location).catch(err => err)
 }
 Vue.config.productionTip = false
-axios.defaults.baseURL = 'http://127.0.0.1:5050'
+// axios.defaults.baseURL = 'http://127.0.0.1:5050'
+axios.defaults.baseURL = 'http://120.78.15.79:5050'
+
 axios.defaults.withCredentials = true // 每次请求,无论是否跨域,都带上cookie信息
 Vue.prototype.$axios = axios
 // Vue.prototype.$baseURL = baseURL

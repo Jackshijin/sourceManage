@@ -18,7 +18,7 @@
                 </span>
                   <el-dropdown-menu slot="dropdown" >
                     <el-dropdown-item command="toHome">首页</el-dropdown-item>
-                    <el-dropdown-item>Github</el-dropdown-item>
+                    <el-dropdown-item command="gitHub">Github</el-dropdown-item>
                     <el-dropdown-item command="selfInfo">个人信息</el-dropdown-item>
                     <el-dropdown-item>消息</el-dropdown-item>
                     <el-dropdown-item command="logOut">退出</el-dropdown-item>
@@ -167,6 +167,13 @@ export default {
       if (command === 'selfInfo') {
         this.getSelfInfo()
       }
+      if (command === 'gitHub') {
+        this.toGithub()
+      }
+    },
+    toGithub () {
+      // window.location.href = 'https://github.com/Jackshijin/sourceManage'
+      window.open('https://github.com/Jackshijin/sourceManage')
     },
     getSelfInfo () {
       this.$router.push({name: 'selfInfo'})

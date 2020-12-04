@@ -62,8 +62,8 @@
 * 这里面有不少的功能都是可以抽成组件进行复用的，但是这个也搁置了
 
 ## 关于答辩
-豆瓣写了一个帖子：[传送门](https://www.douban.com/doubanapp/dispatch?uri=/group/topic/176213754)
-博客有记录一些坑点：[传送门](https://blog.csdn.net/Jackshijin/article/details/104943269),不过到现在都还没补上。。。
+* 豆瓣写了一个帖子：[传送门](https://www.douban.com/doubanapp/dispatch?uri=/group/topic/176213754)
+* 博客有记录一些坑点：[传送门](https://blog.csdn.net/Jackshijin/article/details/104943269),不过到现在都还没补上。。。
     
 ## 注意
 * 项目直接clone然后 npm install 再 run 的话是跑不起来的，因为这里的接口是线上的接口，还有qq邮箱的smtp服务也是要自己配的；而服务器到期了，线上的接口直接调用肯定会报错的！
